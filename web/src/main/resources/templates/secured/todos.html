@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="template :: common-header"/>
+
+    <title>Author page</title>
+</head>
+<body>
+<div th:replace="template :: navbar"/>
+
+
+<div th:replace="template :: js-imports"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Your todos</h1>
+            <table class="table table-hover">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Done?</th>
+                </tr>
+                <tr th:each="todo,index : ${todos}">
+                    <td scope="row" th:text="${index.count}"></td>
+                    <td th:text="${todo.content}"></td>
+                    <td>
+                        <span style="padding-left: 2em;">
+                            <input class="form-check-input" th:id="${'todoStatus'+todo.id}" type="checkbox" th:onclick="${'changeDoneStatus(' + todo.id + ')'}" th:checked="${todo.done}"/>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 1em;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTodoModal">
+            Ajouter un Todo
+        </button>
+
+        <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModal"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ajouter un Todo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addTodoForm" action="#" method="post" th:action="@{/secured/todos}"
+                              th:object="${addTodo}">
+                            <label for="inputContent" class="col-sm-2 col-form-label">Contenu</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputContent" placeholder=""
+                                       th:field="*{inputContent}"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary" id="addTodoButton">Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="application/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                $('#addTodoModal').on('show.bs.modal', function (e) {
+                    $('#inputContent').val('');
+                });
+
+                $('#addTodoButton').click(function (e) {
+                    $('#addTodoForm').submit();
+                    $('#addTodoModal').modal('hide');
+                });
+            });
+
+            function changeDoneStatus(todoId) {
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: 'PUT',
+                    url: /*[[@{/secured/todos/done}]]*/,
+                    data: JSON.stringify({'id': todoId, 'done': $('#todoStatus' + todoId).prop('checked')}),
+                    dataType: 'json'
+                });
+            }
+            /*]]>*/
+        </script>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="template :: common-header"/>
+
+    <title>Error!</title>
+</head>
+<body>
+<div th:replace="template :: navbar"/>
+
+<div class="container">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error Occurred!</h4>
+        <b>[<span th:text="${status}">Status not specified</span>]
+            <span th:text="${error}">Error not specified</span>
+        </b>
+        <br />
+        <p th:text="${message}">Message not specified</p>
+    </div>
+</div>
+
+<div th:replace="template :: js-imports"/>
+</body>
+</html>
