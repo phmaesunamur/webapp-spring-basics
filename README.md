@@ -1,4 +1,4 @@
-#Notre projet
+# Notre projet
 Le contexte de notre projet est très simple: la gestion de Todos. Le contexte technique sera une application web, une base de données relationnelle PostgreSQL. 
 
 Le projet va suivre une division technique, en trois couches: _web_ avec les vues, _business_ qui contient la logique métier, _data-access_ contenant la logique pour l'intéraction avec la base de données.
@@ -11,7 +11,7 @@ L'archive 'exécutable' de notre application web sera un _war_. Cette archive se
 ![Architecture HL](documentation/archi.png) 
 
 
-#Stories
+# Stories
 * user story: _en tant qu'utilisateur, je veux avoir une liste de todos_
     * tâche: créer la db, la table, la séquence 
     * tâche: créer l'entity Todo (id, content, authorId) 
@@ -74,7 +74,7 @@ Pour vous entrainer:
     * tâche: modifier le CustomUserDetailsService 
 
 
-#Spring
+# Spring
 Spring est un framework libre et complet d'applications Java prenant en charge de nombreux aspects du développement et aidant à produire plus rapidement des applications de qualité et de performances élevées. Le framework se fonde sur de nombreux design patterns et conduit à employer les meilleures pratiques industrielles pour concevoir et implémenter les applications.
 
 Spring est un conteneur dit « léger » à savoir que vous n'avez pas besoin d'utiliser un serveur d'applications souvent lourd et qui oblige à mettre en place toute une machinerie mais, et c'est là la force de Spring, vous pouvez bénéficier des mêmes avantages. 
@@ -93,7 +93,7 @@ De plus, Spring s'intègre avec de nombreuses technologies majeures afin de simp
 Spring utilise aussi abondamment la programmation par aspects afin d'automatiser et de rendre plus facile son utilisation, notamment avec l'utilisation de nombreuses annotations.
 
 
-##Spring Boot
+## Spring Boot
 Spring Boot fournit principalement trois choses:
 * un bom (_Bill Of Materials_): il s'agit d'une liste de composants utilisables, plus ou moins finis (à savoir utilisables en l'état). Le but principale est de faciliter la gestion des versions de tous les composants en jeu.
 Lorsqu'il y a une nouvelle version, Spring assure que les versions de tous les composants inclus sont compatibles. Il s'agit aussi de faciliter la gestion des dépendances. Tout est au même endroit. Ce qui vient d'être dit est aussi valable pour les plugins Maven. 
@@ -103,13 +103,13 @@ Lorsqu'il y a une nouvelle version, Spring assure que les versions de tous les c
 La philosophie principale est, et a toujours été avec Spring, _convention over configuration_. Mais ça doit rester "personnalisable" (dans une certaine limite).
 
 
-##Structure
+## Structure
 ![Structure Maven](documentation/pom_structure.png)
 * Spring Boot dependencies est ici utilisé comme _bom_ et non comme parent. En effet, l'utilisation comme parent nous empêche d'avoir notre propre parent.
 Le choix est donc fait de ne pas se faire imposer certaines choses. On s'en sert vraiment comme répertoire contenant des déclarations de dépendances/plugins. 
 
 
-#DB
+# DB
 Voici les quatre étapes pour la création de la base données _webappspringbasics_:
 * ```create database webappspringbasics with ENCODING 'UTF8';```
 * ```create user webappspringbasicsuser with password 'webappspringbasics';```  
@@ -122,7 +122,7 @@ Voici les quatre étapes pour la création de la base données _webappspringbasi
 Le fichier contenant le ddl est dans common-test/src/main/resources (mauvais nom de projet...)
 
 
-#Transaction
+# Transaction
 Une transaction permet d'assurer qu'un ensemble d'opérations vont être effectuées en respectant les propriétés **ACID**: _Atomic, Consistent, Isolated, Durable_. 
 Je vous renvoie vers https://fr.wikipedia.org/wiki/Transaction_informatique qui explique cela tès rapidement et avec des mots simples.
 
@@ -140,7 +140,7 @@ Notions importants:
 Voir org.springframework.transaction.annotation.Propagation de Spring.
 
 
-#Test
+# Test
 Dans notre tutoriel, nous allons parler principalement de deux types de test:
 * les tests unitaires : ils sont employés pour s'assurer du bon fonctionnement d'une portion d'un programme (appelée unité). 
 Dans un langage orienté objet, une unité correspond généralement à une classe ou à une méthode. 
@@ -154,7 +154,7 @@ Ils vérifient si l'intégration des unités et leurs interactions sont correcte
 Ils vont valider que toutes les parties développées indépendamment fonctionnent correctement ensemble.
 
 
-##Tests unitaires
+## Tests unitaires
 Le but est donc de tester une classe/méthode de manière isolée. Pour les tests unitaires, on utilisera principalement JUnit, Mockito et assertj.
 
 * JUnit met à disposition des développeurs des annotations, des classes pour exécuter les tests (runners) ainsi que des moyens pour vérifier que les résultats obtenus sont bien ceux qu'on veut avoir;
@@ -175,7 +175,7 @@ Peut-être pas par commencer à écrire les tests, mais vous allez les écrire d
 Les tests nous permettent de voir le code créé du point de vue de l'utilisation, plutôt que de l'implémentation.
 
 
-##Tests d'intégration
+## Tests d'intégration
 Pour les tests d'intégration, l'approche est évidemment très différente. Il faut instancier la classe qu'on veut tester, mais aussi ses dépendances. Mais aussi les dépendances des dépendances, etc.
 
 Dans le context de Spring, on n'instancie pas les classes directement: c'est Spring qui se charge de cela. Il faut donc créer un ApplicationContext pour les tests. Spring met à disposition beaucoup de choses pour faciliter cela.
@@ -185,7 +185,7 @@ Les tests d'intégration avec la base de données sont aussi importants. Il y a 
 Même remarque que pour les tests unitaires: si la mise en place d'un test d'intégration est fastidieuse, c'est qu'il y a un problème de design.
 
 
-#Spring Security
+# Spring Security
 Tout est dans le nom. Spring Security s'occupe de la sécurité. Le framework peut le faire à plusieurs niveaux et de plusieurs manières. Il est extrêmement flexible et permet de mettre en place plusieurs modèles de sécurité.
 
 Spring Security fait abondamment usage du **SpEL** (_Spring Expression Language_) qui est une sorte de DSL propre à Spring. Voir https://docs.spring.io/spring-security/site/docs/current/reference/html/el-access.html . 
@@ -193,7 +193,7 @@ Spring Security fait abondamment usage du **SpEL** (_Spring Expression Language_
 ![Diagramme de séquence du login](documentation/springsecu.png) 
 
 
-#Ressources
+# Ressources
 * https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/
 * https://martinfowler.com/articles/injection.html
 * https://getbootstrap.com/docs/4.0/getting-started/introduction/
