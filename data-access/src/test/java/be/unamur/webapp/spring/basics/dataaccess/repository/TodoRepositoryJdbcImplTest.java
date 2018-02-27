@@ -1,6 +1,7 @@
 package be.unamur.webapp.spring.basics.dataaccess.repository;
 
 import be.unamur.webapp.spring.basics.dataaccess.entity.Todo;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,11 @@ public class TodoRepositoryJdbcImplTest {
 
         List<Todo> todo = repository.findByAuthorId(42L);
 
-        assertThat(todo).hasSize(1);
-        assertThat(todo.get(0).getId()).isPositive();
-        assertThat(todo.get(0).getAuthorId()).isEqualTo(42L);
-        assertThat(todo.get(0).getContent()).isEqualTo("blabla");
+        Assertions.assertThat(todo).hasSize(1);
+        Todo todo1 = todo.get(0);
+        assertThat(todo1.getId()).isPositive();
+        assertThat(todo1.getAuthorId()).isEqualTo(42L);
+        assertThat(todo1.getContent()).isEqualTo("blabla");
     }
 
 }
