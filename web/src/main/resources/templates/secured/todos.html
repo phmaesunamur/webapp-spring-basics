@@ -35,7 +35,7 @@
     </div>
     <div class="row" style="margin-top: 1em;">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTodoModal">
-            Ajouter un Todo
+            Add a todo
         </button>
 
         <div class="modal fade" id="addTodoModal" tabindex="-1" role="dialog" aria-labelledby="addTodoModal"
@@ -43,7 +43,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ajouter un Todo</h5>
+                        <h5 class="modal-title">Add a todo</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -51,7 +51,7 @@
                     <div class="modal-body">
                         <form id="addTodoForm" action="#" method="post" th:action="@{/secured/todos}"
                               th:object="${addTodo}">
-                            <label for="inputContent" class="col-sm-2 col-form-label">Contenu</label>
+                            <label for="inputContent" class="col-sm-2 col-form-label">Content</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="inputContent" placeholder=""
                                        th:field="*{inputContent}"/>
@@ -59,8 +59,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-primary" id="addTodoButton">Ajouter</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="addTodoButton">Add</button>
                     </div>
                 </div>
             </div>
@@ -86,6 +86,7 @@
                         'Content-Type': 'application/json'
                     },
                     type: 'PUT',
+                    //l'url ci-après n'est pas vraiment commentée. Cela permet qu'elle soit générée par Thymeleaf (th:inline=javascript)!
                     url: /*[[@{/secured/todos/done}]]*/,
                     data: JSON.stringify({'id': todoId, 'done': $('#todoStatus' + todoId).prop('checked')}),
                     dataType: 'json'
