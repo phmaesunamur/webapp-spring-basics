@@ -119,7 +119,7 @@ Voici les quatre étapes pour la création de la base données _webappspringbasi
 * ```GRANT ALL PRIVILEGES ON DATABASE webappspringbasics TO webappspringbasicsuser;```
 * ```GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO webappspringbasicsuser;```
 
-Le fichier contenant le ddl est dans common-test/src/main/resources (mauvais nom de projet...)
+Le fichier contenant le ddl est dans common-test/src/main/resources (mauvais nom de projet...).
 
 
 # Transaction
@@ -137,7 +137,12 @@ Notions importants:
 * l'isolation: exprime jusqu'à quel niveau une transaction est isolée par rapport aux autres transactions. Exemple: il pourrait être opportun dans certains cas que deux transactions puissent voir les opérations intérmédiaires qui sont faites, même si celles-ci ne sont pas committed;
 
 * propagation: va en quelque sorte permettre d'exprimer la durée de vie de votre transaction: quand créer une nouvelle transaction, que faire quand une transaction existe déjà, etc.
-Voir org.springframework.transaction.annotation.Propagation de Spring.
+Voir _org.springframework.transaction.annotation.Propagation_ de Spring.
+
+## It's a trap!
+
+
+# AJAX
 
 
 # Test
@@ -192,6 +197,12 @@ Spring Security fait abondamment usage du **SpEL** (_Spring Expression Language_
 
 ![Diagramme de séquence du login](documentation/springsecu.png) 
 
+# HowToUse
+* Vous avez besoin du JDK8, de Maven 3, de Tomcat 8 et d'une base de données PostgreSQL (9.4+);
+* créez la base de données comme indiqué dans la section DB;
+* ```mvn clean install``` sur le projet racine;
+* déployez le war dans le répertoire _webapps_ de Tomcat et démarrez le;
+* il faut ajouter un author pour se connecter dans la table _t\_author_. Le mot de passe pour tous les utilisateurs est _pass_.
 
 # Ressources
 * https://docs.spring.io/spring/docs/4.3.x/spring-framework-reference/htmlsingle/
