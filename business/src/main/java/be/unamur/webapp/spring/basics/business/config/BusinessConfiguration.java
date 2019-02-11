@@ -1,6 +1,5 @@
 package be.unamur.webapp.spring.basics.business.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,16 +14,8 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class BusinessConfiguration {
 
-    private DataSource dataSource;
-
-    @Autowired
-    public BusinessConfiguration(final DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(final DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
-
 }
