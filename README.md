@@ -107,7 +107,7 @@ La philosophie principale est, et a toujours été avec Spring, _convention over
 ![Structure Maven](documentation/pom_structure.png)
 * Spring Boot dependencies est ici utilisé comme _bom_ et non comme parent. En effet, l'utilisation comme parent nous empêche d'avoir notre propre parent.
 Le choix est donc fait de ne pas se faire imposer certaines choses. On s'en sert vraiment comme répertoire contenant des déclarations de dépendances/plugins. 
-
+* À noter que la configuration doit se passer le plus haut possible si on veut que cela soit flexible et que les couches puissent offrir des composants réutilisables
 
 # DB
 Voici les quatre étapes pour la création de la base données _webappspringbasics_:
@@ -209,3 +209,7 @@ Spring Security fait abondamment usage du **SpEL** (_Spring Expression Language_
 * https://martinfowler.com/articles/injection.html
 * https://getbootstrap.com/docs/4.0/getting-started/introduction/
 * 
+
+* ${session._csrf.headerName} ${session._csrf.token} or without session
+* https://www.baeldung.com/csrf-thymeleaf-with-spring-security
+* https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf

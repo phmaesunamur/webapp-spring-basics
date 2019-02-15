@@ -83,7 +83,8 @@
                 $.ajax({
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        /*[[${_csrf.headerName}]] : [[${_csrf.token}]]*/
                     },
                     type: 'PUT',
                     //l'url ci-après n'est pas vraiment commentée. Cela permet qu'elle soit générée par Thymeleaf (th:inline=javascript)!
