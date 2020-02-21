@@ -33,4 +33,17 @@ public class TodoRepositoryJdbcImpl implements TodoRepository {
         );
     }
 
+    @Override
+    public Todo findById(long todoId) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM t_todo WHERE id = ?",
+                new Object[]{todoId},
+                (rs, rowNum) -> new Todo(rs.getLong(1), rs.getString(2), rs.getLong(3), rs.getBoolean(4))
+        );
+    }
+
+    @Override
+    public void updateStatus(long todoId, boolean status) {
+        jdbcTemplate.update("UPDATE t_todo SET done = ? WHERE id = ?", status, todoId);
+    }
 }

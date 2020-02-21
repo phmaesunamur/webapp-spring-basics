@@ -1,6 +1,7 @@
 package be.unamur.webapp.spring.basics.web.controller;
 
 import be.unamur.webapp.spring.basics.business.service.TodoService;
+import be.unamur.webapp.spring.basics.dataaccess.entity.Todo;
 import be.unamur.webapp.spring.basics.web.model.ChangeDoneStatusForTodo;
 import be.unamur.webapp.spring.basics.web.model.CreateTodo;
 import be.unamur.webapp.spring.basics.web.security.WebUser;
@@ -21,6 +22,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -41,7 +43,9 @@ public class TodoController {
 
         final WebUser webUser = (WebUser) authentication.getPrincipal();
 
-        modelAndView.addObject("todos", todoService.listAllTodos(webUser.getAuthorId()));
+        final List<Todo> todos = todoService.listAllTodos(webUser.getAuthorId());
+
+        modelAndView.addObject("todos", todos);
         modelAndView.addObject("addTodo", new CreateTodo());
 
         return modelAndView;
@@ -61,7 +65,7 @@ public class TodoController {
     @PreAuthorize("hasRole('AUTHOR')")
     @ResponseBody
     public void updateStatus(@RequestBody ChangeDoneStatusForTodo changeDoneStatusForTodo, Authentication authentication) {
-//    @RequestBody MultiValueMap<String, String> body
+        todoService.updateStatus(changeDoneStatusForTodo.getId(), changeDoneStatusForTodo.isDone());
     }
 
 }

@@ -39,6 +39,15 @@ public class TodoServiceImpl implements TodoService {
         return todoRepository.findByAuthorId(authorId);
     }
 
-    //TODO montrer l'attrape avec le this.transactionalMethod
+    @Override
+    @Transactional
+    public void updateStatus(long todoId, boolean status) {
+        final Todo foundTodo = todoRepository.findById(todoId);
 
+        if (foundTodo == null) {
+            throw new BusinessException("todo not found");
+        }
+
+        todoRepository.updateStatus(todoId, status);
+    }
 }

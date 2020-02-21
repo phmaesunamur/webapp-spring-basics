@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Controller
@@ -29,6 +28,13 @@ public class TodoRestController {
     @PreAuthorize("hasRole('AUTHOR')")
     public List<Todo> listTodos(@PathVariable(value = "authorId") long authorId) {
         return todoService.listAllTodos(authorId);
+    }
+
+    @RequestMapping(path = "/todo/{todoId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('AUTHOR')")
+    public Todo getTodo(@PathVariable(value = "todoId") long aaa) {
+        return new Todo(aaa, "jdjdjd", 54);
     }
     
 }

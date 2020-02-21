@@ -80,4 +80,16 @@ public class TodoRestControllerIntegrationTest {
                 .andExpect(jsonPath("$.[1].id", is(2)));
     }
 
+    @Test
+    @WithMockUser(username = "testuser", roles = {"AUTHOR"})
+    public void aaa() throws Exception {
+        final int todoId = 457;
+
+        mvc.perform(MockMvcRequestBuilders.get("/secured/api/todos/todo/{todoId}", todoId))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(todoId)))
+        ;
+    }
+
 }

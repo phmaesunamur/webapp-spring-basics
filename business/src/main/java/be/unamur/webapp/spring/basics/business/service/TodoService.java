@@ -10,4 +10,5 @@ public interface TodoService {
 
     List<Todo> listAllTodos(long authorId);
 
+    void updateStatus(long todoId, boolean status);
 }

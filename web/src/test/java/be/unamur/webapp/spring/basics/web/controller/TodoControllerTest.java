@@ -2,6 +2,7 @@ package be.unamur.webapp.spring.basics.web.controller;
 
 import be.unamur.webapp.spring.basics.business.service.TodoService;
 import be.unamur.webapp.spring.basics.dataaccess.entity.Todo;
+import be.unamur.webapp.spring.basics.web.model.ChangeDoneStatusForTodo;
 import be.unamur.webapp.spring.basics.web.security.WebUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +50,20 @@ public class TodoControllerTest {
 
         ModelAndViewAssert.assertViewName(modelAndView, "secured/todos");
         ModelAndViewAssert.assertModelAttributeValue(modelAndView, "todos", todos);
+    }
+
+    @Test
+    public void updateStatus_should_call_todoService() {
+        final long todoId = 43;
+        final boolean status = false;
+        final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                new WebUser(42, "username", "password", Collections.emptyList()),
+                null
+        );
+
+        todoController.updateStatus(new ChangeDoneStatusForTodo(todoId, status), authentication);
+
+        Mockito.verify(todoService).updateStatus(todoId, false);
     }
 
 }

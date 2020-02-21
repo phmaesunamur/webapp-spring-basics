@@ -10,4 +10,7 @@ public interface TodoRepository {
 
     void create(String content, long authorId);
 
+    Todo findById(long todoId);
+
+    void updateStatus(long todoId, boolean status);
 }
