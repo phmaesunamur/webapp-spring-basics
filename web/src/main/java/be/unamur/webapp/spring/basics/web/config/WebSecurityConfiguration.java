@@ -38,6 +38,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/secured/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
+                .httpBasic()
+                .and()
                 .formLogin()
                 .and()
                 .logout()
